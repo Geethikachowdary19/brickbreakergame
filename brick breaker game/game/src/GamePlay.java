@@ -1,11 +1,3 @@
-
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Graphics2D;
@@ -18,26 +10,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- *
- * @author chinm
- */
 public class GamePlay extends JPanel implements KeyListener, ActionListener {
     
      private boolean play = false;
     private int score = 0;
-    private int totalbricks = 21;
+    private int totalbricks = 20;
     private Timer Timer;
-    private int delay = 8;
+    private int delay = -5;
     private int playerX = 310;
     private int ballposX = 120;
     private int ballposY = 350;
-    private int ballXdir = -1;
-    private int ballYdir = -2;
+    private int ballXdir = 1;
+    private int ballYdir = 2;
     private MapGenerator map;
 
     public GamePlay() {
-        map = new MapGenerator(3, 7);
+        map = new MapGenerator(4, 5);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -46,32 +34,36 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     }
     
      public void paint(Graphics g) {
+        //background
         g.setColor(Color.black);
         g.fillRect(1, 1, 692, 592);
 
         map.draw((Graphics2D) g);
-
-        g.setColor(Color.yellow);
+        //Border color and size
+        g.setColor(Color.GRAY); 
         g.fillRect(0, 0, 3, 592);
         g.fillRect(0, 0, 692, 3);
-        g.fillRect(691, 0, 3, 592);
+        g.fillRect(684, 0, 3, 592); 
 
+        //Score
         g.setColor(Color.white);
         g.setFont(new Font("serif", Font.BOLD, 25));
         g.drawString("" + score, 590, 30);
 
-        g.setColor(Color.yellow);
+        //paddle
+        g.setColor(new Color(175, 255, 175));
         g.fillRect(playerX, 550, 100, 8);
 
         //ball
-        g.setColor(Color.GREEN);
+        g.setColor(Color.WHITE);
         g.fillOval(ballposX, ballposY, 20, 20);
 
+        //End message
         if (ballposY > 570) {
             play = false;
             ballXdir = 0;
             ballYdir = 0;
-            g.setColor(Color.red);
+            g.setColor(Color.yellow);
             g.setFont(new Font("serif", Font.BOLD, 30));
             g.drawString("    Game Over Score: " + score, 190, 300);
 
@@ -82,9 +74,9 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             play = false;
             ballYdir = -2;
             ballXdir = -1;
-            g.setColor(Color.red);
+            g.setColor(Color.yellow);
             g.setFont(new Font("serif",Font.BOLD,30));
-            g.drawString("    Game Over: "+score,190,300);
+            g.drawString("    Game Over: " + score ,190,300);
 
             g.setFont(new Font("serif", Font.BOLD, 30));
             g.drawString("   Press Enter to Restart", 190, 340);
@@ -188,8 +180,8 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
                 ballYdir = -2;
                 score = 0;
                 playerX = 310;
-                totalbricks = 21;
-                map = new MapGenerator(3, 7);
+                totalbricks = 20;
+                map = new MapGenerator(4, 5);
 
                 repaint();
             }
@@ -201,12 +193,12 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         public void moveRight ()
         {
             play = true;
-            playerX += 20;
+            playerX += 10;
         }
         public void moveLeft ()
         {
             play = true;
-            playerX -= 20;
+            playerX -= 10;
         }
         
     
