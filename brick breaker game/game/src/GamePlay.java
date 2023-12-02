@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener; 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -65,7 +65,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             ballYdir = 0;
             g.setColor(Color.yellow);
             g.setFont(new Font("serif", Font.BOLD, 30));
-            g.drawString("    Game Over Score: " + score, 190, 300);
+            g.drawString("    Game Over, Score: " + score, 190, 300);
 
             g.setFont(new Font("serif", Font.BOLD, 30));
             g.drawString("   Press Enter to Restart", 190, 340);
@@ -94,6 +94,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         Timer.start();
 
         if (play) {
+            // check if ball intersects the paddle
             if (new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 8))) {
                 ballYdir = -ballYdir;
             }
