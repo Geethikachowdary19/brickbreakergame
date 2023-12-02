@@ -30,7 +30,7 @@ public class MapGenerator {
                 }
             }
 
-        }
+        } 
     }
     public void setBricksValue(int value,int row,int col)
     {
